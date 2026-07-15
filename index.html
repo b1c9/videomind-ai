@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoMind AI - صناعة الفيديوهات بضغطة زر</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0b0a12;
+            color: #f3f4f6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        /* إطار النيون البنفسجي المتوهج تماماً مثل الصورة */
+        .neon-box {
+            border: 1px solid rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+        .neon-border-focus:focus-within {
+            border-color: rgba(139, 92, 246, 0.8);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-12">
+
+    <!-- الرأس (Header) مطابق للصورة تماماً -->
+    <header class="max-w-4xl mx-auto w-full flex justify-between items-center mb-10">
+        <div class="flex items-center gap-3">
+            <!-- أيقونة الدماغ البنفسجية الفخمة -->
+            <i class="fa-solid fa-brain text-4xl text-violet-500 animate-pulse"></i>
+            <div>
+                <h1 class="text-3xl font-black text-white tracking-wide">VideoMind <span class="text-violet-500">AI</span></h1>
+                <p class="text-xs text-zinc-400 mt-1">صناعة الفيديوهات بضغطة زر</p>
+            </div>
+        </div>
+        <!-- زر ربط المفتاح بنفس ستايل الصورة -->
+        <button onclick="toggleModal()" class="bg-violet-900/40 hover:bg-violet-800/60 text-violet-300 text-xs md:text-sm font-semibold py-2.5 px-6 rounded-full border border-violet-700/50 transition flex items-center gap-2">
+            <i class="fa-solid fa-key"></i>
+            <span>ربط المفتاح (مجاني)</span>
+        </button>
+    </header>
+
+    <!-- المحتوى الرئيسي: الصندوق الأنيق ذو إطار النيون البنفسجي -->
+    <main class="max-w-4xl mx-auto w-full flex flex-col gap-6">
+        
+        <!-- الصندوق العلوي الخاص بالإدخال -->
+        <section class="bg-[#12111a] rounded-3xl p-8 neon-box flex flex-col gap-6">
+            
+            <div class="text-center md:text-right">
+                <h2 class="text-lg font-bold text-white mb-1">ما هي فكرة الفيديو الذي تريده؟</h2>
+                <p class="text-xs text-zinc-500">اكتب هنا فكرة القصة أو السيناريو بالتفصيل (مثال: رحلة مشوقة في أعماق البحار)...</p>
+            </div>
+
+            <!-- حقل الإدخال مع توهج عند التركيز -->
+            <div class="bg-[#191822] border border-zinc-800 rounded-2xl p-4 transition duration-300 neon-border-focus">
+                <textarea id="promptInput" rows="4" class="w-full bg-transparent focus:outline-none text-sm text-zinc-100 placeholder-zinc-700 resize-none" placeholder="قصة مشوقة لاستكشاف سفينة تيتانيك الغارقة في أعماق المحيط الأطلسي..."></textarea>
+            </div>
+
+            <!-- خيارات اختيار المدة والصوت -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-bold text-zinc-400 mb-2 mr-1">مدة الفيديو</label>
+                    <div class="bg-[#191822] border border-zinc-800 rounded-xl p-3 flex items-center">
+                        <select id="duration" class="w-full bg-transparent text-xs text-zinc-300 focus:outline-none cursor-pointer">
+                            <option value="1">دقيقة واحدة (Shorts)</option>
+                            <option value="15">15 دقيقة (يوتيوب)</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-zinc-400 mb-2 mr-1">صوت المعلق</label>
+                    <div class="bg-[#191822] border border-zinc-800 rounded-xl p-3 flex items-center">
+                        <select id="voice" class="w-full bg-transparent text-xs text-zinc-300 focus:outline-none cursor-pointer">
+                            <option value="narrator">صوت راوي فخم</option>
+                            <option value="dramatic">حماسي ودرامي</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- زر التوليد البنفسجي العريض والمطابق للصورة -->
+            <button onclick="startGeneration()" class="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold py-4 rounded-2xl shadow-lg shadow-violet-900/20 transition duration-300 text-sm md:text-base">
+                توليد وتحميل الفيديو الآن
+            </button>
+
+        </section>
+
+        <!-- قسم الـ previewArea بنفس التقسيم الدائري في صورتك -->
+        <section id="previewArea" class="hidden bg-[#12111a] rounded-3xl p-8 border border-zinc-900 flex flex-col gap-6">
+            
+            <div class="flex justify-between items-center border-b border-zinc-900 pb-4">
+                <span class="text-xs font-bold text-zinc-500 uppercase tracking-wider">previewArea</span>
+                <span class="text-xs text-violet-400 font-medium">خطوات العمل</span>
+            </div>
+
+            <!-- قائمة الحالات والخطوات بتنسيق دائري مطابق تماماً للصورة -->
+            <div id="statusList" class="space-y-4 text-sm">
+                <!-- الخطوة الأولى -->
+                <div id="step1" class="flex items-center justify-between text-zinc-500">
+                    <div class="flex items-center gap-3">
+                        <span class="num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold">1</span>
+                        <span>جاري تحليل الفكرة وتوليد السكربت...</span>
+                    </div>
+                    <i class="step-icon fa-solid fa-circle-notch animate-spin text-violet-500 hidden"></i>
+                </div>
+
+                <!-- الخطوة الثانية -->
+                <div id="step2" class="flex items-center justify-between text-zinc-500">
+                    <div class="flex items-center gap-3">
+                        <span class="num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold">2</span>
+                        <span>جاري تركيب الصوت السينمائي...</span>
+                    </div>
+                    <i class="step-icon fa-solid fa-circle-notch animate-spin text-violet-500 hidden"></i>
+                </div>
+
+                <!-- الخطوة الثالثة -->
+                <div id="step3" class="flex items-center justify-between text-zinc-500">
+                    <div class="flex items-center gap-3">
+                        <span class="num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold">3</span>
+                        <span>جاري مونتاج المشاهد وحرق الترجمة التلقائية...</span>
+                    </div>
+                    <i class="step-icon fa-solid fa-circle-notch animate-spin text-violet-500 hidden"></i>
+                </div>
+            </div>
+
+            <!-- مشغل فيديو وهمي أنيق للتحميل والتشغيل -->
+            <div id="videoContainer" class="hidden bg-[#191822] rounded-2xl p-6 border border-zinc-800 text-center animate-fade-in">
+                <i class="fa-solid fa-circle-check text-green-500 text-4xl mb-2"></i>
+                <p class="text-sm font-bold text-zinc-200 mb-4">تم اكتمال الفيديو بنجاح!</p>
+                <button class="w-full bg-zinc-800 hover:bg-zinc-700 text-white font-semibold py-3 px-6 rounded-xl transition flex items-center justify-center gap-2 text-xs">
+                    <i class="fa-solid fa-download"></i> تحميل بصيغة MP4 (بدون علامات مائية)
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- المودال الخاص بربط مفتاح الـ API -->
+    <div id="apiModal" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center p-4 z-50">
+        <div class="bg-[#12111a] p-6 rounded-3xl max-w-sm w-full border border-violet-500/30 text-right">
+            <h3 class="text-md font-bold text-white mb-2">ربط مفتاح الذكاء الاصطناعي 🔑</h3>
+            <p class="text-xs text-zinc-500 mb-4">أدخل رمز مفتاح Google Gemini الخاص بك لتشغيل الموقع مجاناً بالكامل دون فترات تجريبية.</p>
+            <input type="text" id="apiKeyInput" class="w-full bg-[#191822] border border-zinc-800 rounded-xl p-3 text-sm focus:outline-none focus:border-violet-500 text-zinc-200 mb-4" placeholder="AI_KEY_...">
+            <div class="flex gap-2 justify-end">
+                <button onclick="toggleModal()" class="bg-zinc-900 hover:bg-zinc-800 text-zinc-400 text-xs py-2 px-4 rounded-lg">إلغاء</button>
+                <button onclick="saveApiKey()" class="bg-violet-600 hover:bg-violet-500 text-white text-xs py-2 px-4 rounded-lg font-bold">حفظ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer class="max-w-4xl mx-auto w-full text-center text-[10px] text-zinc-600 mt-12">
+        منصة VideoMind AI &copy; 2026 - آمنة وسهلة وبدون أي علامات مائية
+    </footer>
+
+    <!-- تفاعل الخطوات التلقائية والمحاكاة -->
+    <script>
+        function toggleModal() {
+            document.getElementById('apiModal').classList.toggle('hidden');
+        }
+
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value;
+            if(key) {
+                localStorage.setItem('GEMINI_API_KEY', key);
+                alert('تم ربط المفتاح بنجاح! موقعك جاهز الآن للعمل.');
+                toggleModal();
+            }
+        }
+
+        function startGeneration() {
+            const prompt = document.getElementById('promptInput').value;
+            if (!prompt) {
+                alert('يرجى كتابة فكرة الفيديو أولاً!');
+                return;
+            }
+
+            // إظهار منطقة المعاينة
+            document.getElementById('previewArea').classList.remove('hidden');
+            document.getElementById('videoContainer').classList.add('hidden');
+            
+            // تهيئة الخطوات لتطابق حالات العمل
+            resetStep('step1', 'working');
+            resetStep('step2', 'waiting');
+            resetStep('step3', 'waiting');
+
+            // محاكاة التنقل الفاخر بين الخطوات
+            setTimeout(() => {
+                resetStep('step1', 'done');
+                resetStep('step2', 'working');
+            }, 3000);
+
+            setTimeout(() => {
+                resetStep('step2', 'done');
+                resetStep('step3', 'working');
+            }, 6000);
+
+            setTimeout(() => {
+                resetStep('step3', 'done');
+                document.getElementById('videoContainer').classList.remove('hidden');
+            }, 9000);
+        }
+
+        function resetStep(stepId, state) {
+            const step = document.getElementById(stepId);
+            const badge = step.querySelector('.num-badge');
+            const icon = step.querySelector('.step-icon');
+
+            if (state === 'working') {
+                step.className = "flex items-center justify-between text-violet-400 font-semibold";
+                badge.className = "num-badge w-6 h-6 rounded-full bg-violet-600 text-white text-xs flex items-center justify-center font-bold";
+                icon.classList.remove('hidden');
+            } else if (state === 'done') {
+                step.className = "flex items-center justify-between text-green-500 font-medium";
+                badge.className = "num-badge w-6 h-6 rounded-full bg-green-600 text-white text-xs flex items-center justify-center font-bold";
+                icon.classList.add('hidden');
+                // استبدال الرقم بعلامة صح
+                badge.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+            } else {
+                step.className = "flex items-center justify-between text-zinc-500";
+                badge.className = "num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold";
+                icon.classList.add('hidden');
+                // إرجاع الرقم بناء على الخطوة
+                badge.textContent = stepId.charAt(stepId.length - 1);
+            }
+        }
+    </script>
+</body>
+</html>
