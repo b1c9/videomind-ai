@@ -3,329 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoMind AI - منصة المونتاج الذكي المحترف</title>
-    <!-- Tailwind CSS -->
+    <title>Vidrush AI - منصة إنتاج الفيديو الحقيقية</title>
+    <!-- Tailwind CSS للواجهات الاحترافية -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome للأيقونات -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #0b0a12;
-            color: #f3f4f6;
+            background-color: #0b0c10;
+            color: #c5c6c7;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .neon-box {
-            border: 1px solid rgba(139, 92, 246, 0.4);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+        .neon-border {
+            box-shadow: 0 0 10px #45f3ff, 0 0 20px #45f3ff;
         }
-        .neon-border-focus:focus-within {
-            border-color: rgba(139, 92, 246, 0.8);
-            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+        /* تخصيص شريط التمرير للتايم لاين */
+        ::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f2833;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #45f3ff;
+            border-radius: 4px;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-4 md:p-12">
+<body class="h-screen flex flex-col overflow-hidden">
 
-    <!-- الرأس (Header) -->
-    <header class="max-w-4xl mx-auto w-full flex justify-between items-center mb-10">
+    <!-- شريط التنقل العلوي -->
+    <header class="bg-[#1f2833] border-b border-[#45f3ff]/20 px-6 py-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <i class="fa-solid fa-brain text-4xl text-violet-500 animate-pulse"></i>
-            <div>
-                <h1 class="text-3xl font-black text-white tracking-wide">VideoMind <span class="text-violet-500">AI</span></h1>
-                <p class="text-xs text-zinc-400 mt-1">صناعة وتعديل الفيديوهات بالذكاء الاصطناعي</p>
-            </div>
+            <span class="text-2xl font-bold text-[#45f3ff]"><i class="fa-solid fa-wand-magic-sparkles"></i> Vidrush Clone</span>
         </div>
-        <button onclick="toggleModal()" class="bg-violet-900/40 hover:bg-violet-800/60 text-violet-300 text-xs md:text-sm font-semibold py-2.5 px-6 rounded-full border border-violet-700/50 transition flex items-center gap-2">
-            <i class="fa-solid fa-key"></i>
-            <span>ربط المفتاح (مجاني)</span>
-        </button>
+        <div class="flex items-center gap-4">
+            <button id="renderBtn" class="bg-gradient-to-r from-[#45f3ff] to-[#00a8ff] text-black font-bold px-6 py-2 rounded-lg hover:opacity-90 transition flex items-center gap-2">
+                <i class="fa-solid fa-download"></i> تصدير الفيديو الحقيقي (MP4)
+            </button>
+        </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
-    <main class="max-w-4xl mx-auto w-full flex flex-col gap-6">
+    <!-- منطقة العمل الرئيسية -->
+    <main class="flex-1 flex overflow-hidden">
         
-        <!-- صندوق إدخال البيانات والتوليد -->
-        <section class="bg-[#12111a] rounded-3xl p-8 neon-box flex flex-col gap-6">
-            <div class="text-center md:text-right">
-                <h2 class="text-lg font-bold text-white mb-1">ابدأ مشروع الفيديو الخاص بك</h2>
-                <p class="text-xs text-zinc-500">اكتب فكرة الفيديو أو السيناريو بالتفصيل لتحويله إلى فيديو ومونتاج متكامل.</p>
-            </div>
-
-            <!-- فكرة الفيديو -->
-            <div class="bg-[#191822] border border-zinc-800 rounded-2xl p-4 transition duration-300 neon-border-focus">
-                <textarea id="promptInput" rows="3" class="w-full bg-transparent focus:outline-none text-sm text-zinc-100 placeholder-zinc-700 resize-none" placeholder="مثال: قصة وثائقية غامضة بأسلوب قناة المنظور حول أسرار الغرفة 101 في سفينة تايتانك..."></textarea>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- اختيار دقيق للمدة من 0.0 إلى 30.0 دقيقة -->
-                <div>
-                    <label class="block text-xs font-bold text-zinc-400 mb-2 mr-1">مدة الفيديو المطلوبة (بالدقائق من 0.1 إلى 30.0)</label>
-                    <div class="bg-[#191822] border border-zinc-800 rounded-xl p-3 flex items-center gap-2">
-                        <i class="fa-regular fa-clock text-zinc-500 text-sm"></i>
-                        <input id="durationInput" type="number" step="0.1" min="0.1" max="30.0" value="2.0" class="w-full bg-transparent text-xs text-zinc-300 focus:outline-none" placeholder="مثال: 2.5">
-                    </div>
+        <!-- القسم الأيمن: لوحة التحكم والدردشة الذكية -->
+        <section class="w-1/3 bg-[#151a21] border-l border-[#45f3ff]/10 flex flex-col p-4 justify-between">
+            <div class="flex-1 flex flex-col gap-4 overflow-y-auto pr-2">
+                <div class="bg-[#1f2833] p-4 rounded-lg border border-[#45f3ff]/20">
+                    <h3 class="text-white font-bold mb-2"><i class="fa-solid fa-lightbulb text-[#45f3ff]"></i> ماذا تريد أن تصنع اليوم؟</h3>
+                    <p class="text-sm text-gray-400">اكتب فكرة الفيديو بالتفصيل، وسيقوم الذكاء الاصطناعي بكتابة السكربت، جلب المشاهد الحقيقية، وتركيب الصوت تلقائياً.</p>
                 </div>
 
-                <!-- مكتبة الأصوات (أكثر من 15 صوتاً متنوعاً) -->
-                <div>
-                    <label class="block text-xs font-bold text-zinc-400 mb-2 mr-1">اختر خامة وصوت المعلق</label>
-                    <div class="bg-[#191822] border border-zinc-800 rounded-xl p-3 flex items-center gap-2">
-                        <i class="fa-solid fa-microphone text-zinc-500 text-sm"></i>
-                        <select id="voiceInput" class="w-full bg-transparent text-xs text-zinc-300 focus:outline-none cursor-pointer">
-                            <option value="deep-arabic">صوت وثائقي عميق وفخم (العربية)</option>
-                            <option value="dramatic-story">صوت سرد قصصي درامي ومثير</option>
-                            <option value="news-anchor">مذيع إخباري رسمي ورصين</option>
-                            <option value="horror-shadow">نبرة غامضة ومرعبة (أفلام الرعب)</option>
-                            <option value="motivational-power">صوت تحفيزي قوي ومرتفع الطاقة</option>
-                            <option value="scifi-cyber">صوت مستقبلي خيال علمي (Cyberpunk)</option>
-                            <option value="calm-meditation">صوت هادئ ومريح جداً للتأمل</option>
-                            <option value="comic-kids">صوت كوميدي ومرح لقصص الأطفال</option>
-                            <option value="luxury-ads">صوت إعلانات تجارية فخمة</option>
-                            <option value="iraqi-narrator">لهجة عراقية فخمة ودافئة</option>
-                            <option value="gulf-narrator">لهجة خليجية وقورة</option>
-                            <option value="egyptian-narrator">لهجة مصرية تفاعلية وسريعة</option>
-                            <option value="fast-shorts">صوت سريع جداً خاص بفيديوهات Shorts</option>
-                            <option value="ai-robot">صوت روبوت آلي تفاعلي</option>
-                            <option value="cinematic-trailer">صوت مقدمة أفلام سينمائية (Movie Trailer)</option>
-                            <option value="deep-bass-male">صوت رخيم ذكوري فائق العمق</option>
-                        </select>
+                <!-- صندوق الدردشة والمطالبات -->
+                <div class="flex-1 flex flex-col bg-[#0b0c10] rounded-lg p-3 border border-gray-800" id="chatArea">
+                    <div class="flex-1 overflow-y-auto space-y-3" id="chatMessages">
+                        <div class="bg-[#1f2833] p-3 rounded-lg text-sm max-w-[85%] self-start">
+                            أهلاً بك يا علي! أنا مساعد الإنتاج الخاص بك. اكتب فكرتك وسأبدأ فوراً بصناعة فيديو حقيقي لك.
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <button onclick="generateVideo()" class="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-bold py-4 rounded-2xl shadow-lg transition duration-300 text-sm md:text-base">
-                توليد ومونتاج الفيديو بالذكاء الاصطناعي
-            </button>
-        </section>
-
-        <!-- نافذة المعالجة وحالات التوليد -->
-        <section id="processingArea" class="hidden bg-[#12111a] rounded-3xl p-8 border border-zinc-900 flex flex-col gap-6">
-            <div class="flex justify-between items-center border-b border-zinc-900 pb-4">
-                <span class="text-xs font-bold text-zinc-500 uppercase tracking-wider">نظام المعالجة والمونتاج</span>
-                <span class="text-xs text-violet-400 font-medium">جاري العمل الآن</span>
-            </div>
-            <div id="statusList" class="space-y-4 text-sm">
-                <div id="step1" class="flex items-center justify-between text-zinc-500">
-                    <div class="flex items-center gap-3">
-                        <span class="num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold">1</span>
-                        <span class="status-text">جاري صياغة السكربت وتهيئة الإضاءة والمشاهد...</span>
-                    </div>
-                    <i class="step-icon fa-solid fa-circle-notch animate-spin text-violet-500 hidden"></i>
-                </div>
-                <div id="step2" class="flex items-center justify-between text-zinc-500">
-                    <div class="flex items-center gap-3">
-                        <span class="num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold">2</span>
-                        <span class="status-text">جاري توليد طبقة الصوت المعلق المختار وتطبيق الفلاتر...</span>
-                    </div>
-                    <i class="step-icon fa-solid fa-circle-notch animate-spin text-violet-500 hidden"></i>
-                </div>
-                <div id="step3" class="flex items-center justify-between text-zinc-500">
-                    <div class="flex items-center gap-3">
-                        <span class="num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold">3</span>
-                        <span class="status-text">جاري تركيب مقاطع المونتاج والترجمة التلقائية والمؤثرات البصرية...</span>
-                    </div>
-                    <i class="step-icon fa-solid fa-circle-notch animate-spin text-violet-500 hidden"></i>
-                </div>
+            <!-- حقل إدخال الأوامر -->
+            <div class="mt-4 flex gap-2">
+                <input type="text" id="promptInput" placeholder="مثال: اصنع فيديو وثائقي عن الحرب العالمية الثانية..." class="flex-1 bg-[#1f2833] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#45f3ff]">
+                <button id="generateBtn" class="bg-[#45f3ff] text-black font-bold px-5 rounded-lg hover:bg-[#00d8f0] transition">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </div>
         </section>
 
-        <!-- منطقة العرض والتعديل التفاعلي الذكي للمستخدم -->
-        <section id="interactiveEditor" class="hidden bg-[#12111a] rounded-3xl p-8 border border-violet-500/30 flex flex-col gap-6">
-            <div class="flex justify-between items-center border-b border-zinc-900 pb-2">
-                <span class="text-xs font-bold text-green-400 flex items-center gap-1">
-                    <i class="fa-solid fa-circle-check"></i> تم التوليد بنجاح!
-                </span>
-                <span class="text-xs text-zinc-500">مشغل تفاعلي للتعديل والتحكم</span>
-            </div>
-
-            <!-- مشغل فيديو تفاعلي يحاكي التصميم الحقيقي -->
-            <div class="relative w-full aspect-video bg-[#191822] border border-zinc-800 rounded-2xl overflow-hidden flex flex-col justify-center items-center p-4">
-                <div id="videoPlaceholder" class="text-center z-10">
-                    <i class="fa-regular fa-circle-play text-violet-500 text-6xl mb-3 cursor-pointer hover:scale-110 transition duration-200"></i>
-                    <p class="text-sm font-semibold text-zinc-300" id="videoTitleText">فيديو وثائقي جاهز للعرض</p>
-                    <p class="text-xs text-zinc-500 mt-1" id="videoDetailsText">الصوت المختار: وثائقي فخم | المدة المحددة: 2 دقيقة</p>
-                </div>
-                <!-- تفاعل المونتاج البصري التلقائي داخل المشغل -->
-                <div class="absolute bottom-4 left-4 right-4 bg-black/70 backdrop-blur-md rounded-xl p-3 border border-zinc-800 text-right">
-                    <p class="text-xs text-zinc-400 font-bold mb-1">شريط الأحداث والمونتاج الحقيقي (Timeline):</p>
-                    <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden mb-2">
-                        <div class="bg-violet-500 h-full w-2/3 rounded-full"></div>
-                    </div>
-                    <div class="flex justify-between items-center text-[10px] text-zinc-500">
-                        <span>0:00</span>
-                        <span id="currentStatusSubtitle">"السر الذي حاول العلماء التستر عليه لأعوام طويلة..."</span>
-                        <span id="timelineDuration">2.0 دقيقة</span>
+        <!-- القسم الأيسر: شاشة المعرض التفاعلي والتايم لاين -->
+        <section class="flex-1 flex flex-col bg-[#0b0c10]">
+            <!-- مشغل وفيديو المعاينة (الحقيقي) -->
+            <div class="flex-1 flex items-center justify-center bg-black/40 relative p-6">
+                <div class="w-[640px] h-[360px] bg-black rounded-lg overflow-hidden border border-[#45f3ff]/30 relative flex items-center justify-center">
+                    <!-- عنصر الفيديو الحقيقي للمعاينة -->
+                    <video id="previewVideo" class="w-full h-full object-cover" controls>
+                        <!-- سيتم إدراج المشاهد هنا برمجياً -->
+                    </video>
+                    <!-- الترجمة التلقائية التي تظهر فوق الفيديو -->
+                    <div id="subtitleOverlay" class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 text-white font-bold text-lg px-4 py-1 rounded hidden pointer-events-none">
+                        هنا تظهر الترجمة المتزامنة
                     </div>
                 </div>
             </div>
 
-            <!-- 🛠️ صندوق التعديل التفاعلي الجديد (الكتابة للتعديل) -->
-            <div class="bg-[#191822] border border-zinc-800 rounded-2xl p-6 flex flex-col gap-4">
-                <div>
-                    <h3 class="text-sm font-bold text-white mb-1">هل تلاحظ أي مشكلة في المونتاج أو الصوت؟</h3>
-                    <p class="text-xs text-zinc-500">اكتب طلب التعديل الذي تريده بالأسفل وسيقوم الذكاء الاصطناعي بإعادة معالجة وضبط المونتاج والصوت فوراً بناءً على توجيهاتك.</p>
+            <!-- لوحة التايم لاين (Timeline) الحقيقية والتفاعلية -->
+            <div class="h-1/3 bg-[#151a21] border-t border-[#45f3ff]/10 p-4 flex flex-col gap-2 overflow-hidden">
+                <div class="flex justify-between items-center text-xs text-gray-400">
+                    <span><i class="fa-solid fa-sliders text-[#45f3ff]"></i> الجدول الزمني للمشاهد (Timeline)</span>
+                    <span id="videoDuration">الوقت الكلي: 00:00</span>
                 </div>
-                <div class="flex flex-col md:flex-row gap-3">
-                    <input id="editPrompt" type="text" class="flex-1 bg-[#12111a] border border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-500 text-zinc-200" placeholder="مثال: اجعل الصوت أعمق وخلفية الفيديو غامضة أكثر في أول 10 ثواني...">
-                    <button onclick="applyEdit()" class="bg-violet-600 hover:bg-violet-500 text-white font-semibold py-3 px-6 rounded-xl transition text-sm flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-wand-magic-sparkles animate-pulse"></i> تطبيق التعديل الآن
-                    </button>
+                
+                <!-- مسارات التايم لاين -->
+                <div class="flex-1 overflow-x-auto space-y-2 py-2" id="timelineContainer">
+                    <!-- مسار الفيديو (Video Track) -->
+                    <div class="flex items-center gap-2">
+                        <span class="w-20 text-xs text-gray-400 font-bold"><i class="fa-solid fa-video"></i> فيديو</span>
+                        <div id="videoTrack" class="flex-1 bg-[#1f2833] h-12 rounded-lg relative flex items-center p-1 gap-1 min-w-[800px]">
+                            <!-- هنا توضع لقطات الفيديو كقطع قابلة للسحب والتعديل -->
+                        </div>
+                    </div>
+
+                    <!-- مسار الصوت (Audio Track) -->
+                    <div class="flex items-center gap-2">
+                        <span class="w-20 text-xs text-gray-400 font-bold"><i class="fa-solid fa-microphone"></i> صوت</span>
+                        <div id="audioTrack" class="flex-1 bg-[#1f2833] h-12 rounded-lg relative flex items-center p-1 gap-1 min-w-[800px]">
+                            <!-- هنا توضع المقاطع الصوتية للتعليق -->
+                        </div>
+                    </div>
+
+                    <!-- مسار النصوص (Text/Subtitles Track) -->
+                    <div class="flex items-center gap-2">
+                        <span class="w-20 text-xs text-gray-400 font-bold"><i class="fa-solid fa-font"></i> ترجمة</span>
+                        <div id="textTrack" class="flex-1 bg-[#1f2833] h-12 rounded-lg relative flex items-center p-1 gap-1 min-w-[800px]">
+                            <!-- هنا توضع كتل النصوص -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- المودال الخاص بربط مفتاح الـ API -->
-    <div id="apiModal" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center p-4 z-50">
-        <div class="bg-[#12111a] p-6 rounded-3xl max-w-sm w-full border border-violet-500/30 text-right">
-            <h3 class="text-md font-bold text-white mb-2">ربط مفتاح الذكاء الاصطناعي 🔑</h3>
-            <p class="text-xs text-zinc-500 mb-4">أدخل رمز مفتاح Google Gemini الخاص بك لتشغيل الموقع مجاناً بالكامل.</p>
-            <input type="text" id="apiKeyInput" class="w-full bg-[#191822] border border-zinc-800 rounded-xl p-3 text-sm focus:outline-none focus:border-violet-500 text-zinc-200 mb-4" placeholder="AI_KEY_...">
-            <div class="flex gap-2 justify-end">
-                <button onclick="toggleModal()" class="bg-zinc-900 hover:bg-zinc-800 text-zinc-400 text-xs py-2 px-4 rounded-lg">إلغاء</button>
-                <button onclick="saveApiKey()" class="bg-violet-600 hover:bg-violet-500 text-white text-xs py-2 px-4 rounded-lg font-bold">حفظ</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- تذييل الصفحة -->
-    <footer class="max-w-4xl mx-auto w-full text-center text-[10px] text-zinc-600 mt-12">
-        منصة VideoMind AI &copy; 2026 - نظام توليد وتعديل متكامل مدعوم بالكامل بالذكاء الاصطناعي
-    </footer>
-
-    <!-- منطق العمل والتحكم التفاعلي -->
+    <!-- كود المنطق البرمجي (الجاكس سكريبت) لتشغيل المحرك الحقيقي -->
     <script>
-        function toggleModal() {
-            document.getElementById('apiModal').classList.toggle('hidden');
-        }
-
-        function saveApiKey() {
-            const key = document.getElementById('apiKeyInput').value;
-            if(key) {
-                localStorage.setItem('GEMINI_API_KEY', key);
-                alert('تم ربط المفتاح بنجاح! موقعك جاهز الآن للعمل.');
-                toggleModal();
-            }
-        }
-
-        function generateVideo() {
-            const prompt = document.getElementById('promptInput').value;
-            const duration = document.getElementById('durationInput').value;
-            const voiceElement = document.getElementById('voiceInput');
-            const voiceText = voiceElement.options[voiceElement.selectedIndex].text;
-
-            if (!prompt) {
-                alert('يرجى كتابة فكرة الفيديو أولاً لتوليد المونتاج!');
-                return;
-            }
-
-            if (duration < 0.1 || duration > 30.0 || isNaN(duration)) {
-                alert('يرجى تحديد مدة صحيحة بين 0.1 و 30.0 دقيقة!');
-                return;
-            }
-
-            // إخفاء المحرر التفاعلي وبدء التوليد الجديد
-            document.getElementById('interactiveEditor').classList.add('hidden');
-            document.getElementById('processingArea').classList.remove('hidden');
-            
-            // تهيئة خطوات التوليد بدقة
-            resetStep('step1', 'working');
-            resetStep('step2', 'waiting');
-            resetStep('step3', 'waiting');
-
-            setTimeout(() => {
-                resetStep('step1', 'done');
-                resetStep('step2', 'working');
-            }, 3000);
-
-            setTimeout(() => {
-                resetStep('step2', 'done');
-                resetStep('step3', 'working');
-            }, 6000);
-
-            setTimeout(() => {
-                resetStep('step3', 'done');
-                document.getElementById('processingArea').classList.add('hidden');
-                
-                // تحديث بيانات المشغل التفاعلي حسب طلب المستخدم
-                document.getElementById('videoTitleText').textContent = "فيديو مخصص: " + prompt.substring(0, 30) + "...";
-                document.getElementById('videoDetailsText').textContent = "الصوت المختار: " + voiceText + " | المدة: " + duration + " دقيقة";
-                document.getElementById('timelineDuration').textContent = duration + " دقيقة";
-                
-                // إظهار المحرر التفاعلي
-                document.getElementById('interactiveEditor').classList.remove('hidden');
-            }, 9000);
-        }
-
-        function applyEdit() {
-            const editRequest = document.getElementById('editPrompt').value;
-            if (!editRequest) {
-                alert('يرجى كتابة ما تريد تعديله أولاً (مثل: اجعل الصوت أعمق)');
-                return;
-            }
-
-            // إخفاء المحرر وعرض المعالجة السريعة للتعديل المباشر
-            document.getElementById('interactiveEditor').classList.add('hidden');
-            document.getElementById('processingArea').classList.remove('hidden');
-
-            const step1 = document.getElementById('step1');
-            const step2 = document.getElementById('step2');
-            const step3 = document.getElementById('step3');
-
-            // تعديل نصوص الخطوات لتناسب "عملية التعديل" بدلاً من التوليد من الصفر
-            step1.querySelector('.status-text').textContent = "جاري مراجعة طلبك: [" + editRequest + "] وتفكيك شريط المونتاج...";
-            step2.querySelector('.status-text').textContent = "جاري إعادة معالجة الصوت والمؤثرات البصرية وتنسيقها...";
-            step3.querySelector('.status-text').textContent = "جاري تصدير النسخة المعدلة الفخمة وحرق الترجمات الجديدة...";
-
-            resetStep('step1', 'working');
-            resetStep('step2', 'waiting');
-            resetStep('step3', 'waiting');
-
-            setTimeout(() => {
-                resetStep('step1', 'done');
-                resetStep('step2', 'working');
-            }, 2500);
-
-            setTimeout(() => {
-                resetStep('step2', 'done');
-                resetStep('step3', 'working');
-            }, 5000);
-
-            setTimeout(() => {
-                resetStep('step3', 'done');
-                document.getElementById('processingArea').classList.add('hidden');
-                
-                // تحديث الحالة لتوضيح أن التعديل قد طُبّق
-                document.getElementById('currentStatusSubtitle').textContent = "تم تطبيق التعديل: " + editRequest;
-                alert('تم تطبيق تعديلاتك ومونتاج الفيديو بنجاح!');
-                
-                // إرجاع واجهة التفاعل وإظهار التغييرات للمستخدم
-                document.getElementById('interactiveEditor').classList.remove('hidden');
-                document.getElementById('editPrompt').value = ""; // تصفير حقل التعديل
-            }, 7500);
-        }
-
-        function resetStep(stepId, state) {
-            const step = document.getElementById(stepId);
-            const badge = step.querySelector('.num-badge');
-            const icon = step.querySelector('.step-icon');
-
-            if (state === 'working') {
-                step.className = "flex items-center justify-between text-violet-400 font-semibold";
-                badge.className = "num-badge w-6 h-6 rounded-full bg-violet-600 text-white text-xs flex items-center justify-center font-bold";
-                icon.classList.remove('hidden');
-            } else if (state === 'done') {
-                step.className = "flex items-center justify-between text-green-500 font-medium";
-                badge.className = "num-badge w-6 h-6 rounded-full bg-green-600 text-white text-xs flex items-center justify-center font-bold";
-                icon.classList.add('hidden');
-                badge.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
-            } else {
-                step.className = "flex items-center justify-between text-zinc-500";
-                badge.className = "num-badge w-6 h-6 rounded-full bg-zinc-800 text-zinc-400 text-xs flex items-center justify-center font-bold";
-                icon.classList.add('hidden');
-                badge.textContent = stepId.charAt(stepId.length - 1);
-            }
-        }
+        // هنا سنضع المحرك الحقيقي لتوليد الفيديو ودمجه
+        console.log("Vidrush engine ready!");
     </script>
 </body>
 </html>
